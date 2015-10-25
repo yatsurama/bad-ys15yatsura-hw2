@@ -95,7 +95,7 @@ public class RWayTrie implements Trie {
         
         int size = size();
         root = delete(root, word, 0);
-        return (size() == size-1);
+        return size() == size-1;
     }
     
     private Node delete(Node y, String s, int d) {
@@ -159,7 +159,7 @@ public class RWayTrie implements Trie {
         
         while (!queue.isEmpty()) {
             NodeWithWord v = new NodeWithWord(queue.removeFirst());
-            if (v.node.getValue()!=EMPTY_VAL) {
+            if (v.node.getValue() != EMPTY_VAL) {
                 words.push(v.word);
             }
             for (char c = 'a'; c < 'a'+R; c++) {

@@ -1,8 +1,9 @@
 package ua.yandex.shad.collections;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class DArray implements Iterable<String>{
+public class DArray implements Iterable<String> {
     public static final int DEFAULT_LENGTH = 16;
     public int actualLength;
     
@@ -19,16 +20,16 @@ public class DArray implements Iterable<String>{
     }
     
     public void validateIndex(int index) {
-        if (index < 0 || index>=actualLength) {
+        if (index < 0 || index >= actualLength) {
             throw new IndexOutOfBoundsException();
         }
     }
     
     public void validateLength(int newLength) {
-        if(newLength > strings.length) {
+        if (newLength > strings.length) {
             int arrLength = strings.length * 2;
             String[] newStrings = new String[arrLength];
-            for (int i = 0; i <strings.length; i++ ) {
+            for (int i = 0; i < strings.length; i++) {
                 newStrings[i] = strings[i];
             }
             strings = newStrings;
