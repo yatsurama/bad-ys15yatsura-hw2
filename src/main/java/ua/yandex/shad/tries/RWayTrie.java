@@ -68,7 +68,6 @@ public class RWayTrie implements Trie {
     @Override
     public void add(Tuple t) {
         root = add(root, t, 0);
-        //throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public Node add(Node y, Tuple t, int d) {

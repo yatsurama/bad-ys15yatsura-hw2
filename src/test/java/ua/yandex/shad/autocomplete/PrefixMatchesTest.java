@@ -275,6 +275,26 @@ public class PrefixMatchesTest {
         result = prefMatches.wordsWithPrefix("y");
     }
     
+    @Test
+    public void testWordsWithPrefix_String_int_DifficultCase() {  
+        prefMatches.getTrie().add(mockTiger);
+        prefMatches.getTrie().add(mockYouth);
+        prefMatches.getTrie().add(mockHe);
+        prefMatches.getTrie().add(mockHead);
+        prefMatches.getTrie().add(mockAntananarivu);
+        prefMatches.getTrie().add(mockEmpty);
+        
+        DArray expResult = new DArray();
+        expResult.push("he");
+        expResult.push("hey");
+        expResult.push("head");
+        expResult.push("hell");     
+        expResult.push("hello");
+        
+        DArray result = prefMatches.wordsWithPrefix("he", 6);
+        assertEquals(result, expResult);
+    }
+    
     /**
      * Test of size method, of class PrefixMatches.
      */
