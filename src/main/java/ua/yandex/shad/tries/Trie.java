@@ -3,15 +3,15 @@ import ua.yandex.shad.collections.DArray;
 
 public interface Trie {
 
-    public void add(Tuple word);
+    void add(Tuple word);
 
-    public boolean contains(String word);
+    boolean contains(String word);
 
-    public boolean delete(String word);
+    boolean delete(String word);
 
-    public DArray words();
+    DArray words();
 
-    public DArray wordsWithPrefix(String pref);
+    DArray wordsWithPrefix(String pref);
     
-    public int size();
+    int size();
 }

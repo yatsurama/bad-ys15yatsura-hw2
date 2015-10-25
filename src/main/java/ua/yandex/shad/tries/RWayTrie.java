@@ -1,7 +1,6 @@
 package ua.yandex.shad.tries;
 
-import java.util.*;
-import java.util.Queue;
+import java.util.LinkedList;
 import ua.yandex.shad.collections.DArray;
 
 public class RWayTrie implements Trie {
@@ -38,7 +37,7 @@ public class RWayTrie implements Trie {
     
     public static int indexOf(char c) {
         int index = c-LETTER_SHIFT;
-        if (index<0 || index >= R) {
+        if (index < 0 || index >= R) {
             throw new IllegalArgumentException();
         }
         return index;
@@ -46,20 +45,20 @@ public class RWayTrie implements Trie {
      
     public int getVal(String s) {
         Node x = get(root, s, 0);
-        if(x == null) {
+        if (x == null) {
             return EMPTY_VAL;
         }
-        return (int)x.val;
+        return (int) x.val;
     }
     
     public Node get(Node x, String s, int d) {
-        if(s == null) {
+        if (s == null) {
             return null;
         }
-        if(x == null) {
+        if (x == null) {
             return null;
         }
-        if(d == s.length()) {
+        if (d == s.length()) {
             return x;
         }
         char c = s.charAt(d);
@@ -72,11 +71,12 @@ public class RWayTrie implements Trie {
         //throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Node add(Node x, Tuple t, int d) {
-        if(x == null) {
+    public Node add(Node y, Tuple t, int d) {
+        Node x = y;
+        if (x == null) {
             x = new Node();
         }
-        if(d == t.getTerm().length()) {
+        if (d == t.getTerm().length()) {
             x.val = t.getWeight();
             return x;
         }
@@ -87,7 +87,7 @@ public class RWayTrie implements Trie {
     
     @Override
     public boolean contains(String word) {
-        return (!(getVal(word) == EMPTY_VAL));
+        return !(getVal(word) == EMPTY_VAL);
     }
 
     @Override
@@ -95,33 +95,27 @@ public class RWayTrie implements Trie {
         
         int size = size();
         root = delete(root, word, 0);
-        if (size() == size-1) {
-            return true;
-        } else {
-            return false;
-        }
+        return (size() == size-1);
     }
     
-    private Node delete(Node x, String s, int d) {
-        if (s == null) {
+    private Node delete(Node y, String s, int d) {
+        if (s == null || y == null) {
             return null;
-        }
-        if (x == null) {
-            return null;
-        }
-        if (d == s.length()) {
-            x.val = EMPTY_VAL;
-        } else {
-            char c = s.charAt(d);
-            x.next[indexOf(c)] = delete(x.next[indexOf(c)], s, d+1);
         }
         
-        if (x.val != EMPTY_VAL) {
-            return x;
+        if (d == s.length()) {
+            y.val = EMPTY_VAL;
+        } else {
+            char c = s.charAt(d);
+            y.next[indexOf(c)] = delete(y.next[indexOf(c)], s, d+1);
+        }
+        
+        if (y.val != EMPTY_VAL) {
+            return y;
         }
         for (char c = 'a'; c < 'a'+R; c++) {
-            if (x.next[indexOf(c)] != null) {
-                return x;
+            if (y.next[indexOf(c)] != null) {
+                return y;
             }
         }
         return null;
@@ -132,15 +126,10 @@ public class RWayTrie implements Trie {
         return wordsWithPrefix("");
     }
 
-    class NodeWithWord {
+    static class NodeWithWord {
         public final Node node;
         public final String word;
  
-        public NodeWithWord() {
-            node = null;
-            word = "";
-        }
-        
         public NodeWithWord(Node n, String w) {
             node = n;
             word = w;
@@ -173,8 +162,8 @@ public class RWayTrie implements Trie {
             if (v.node.getValue()!=EMPTY_VAL) {
                 words.push(v.word);
             }
-            for(char c = 'a'; c < 'a'+R; c++) {
-                if(v.node.next[indexOf(c)]!=null) {
+            for (char c = 'a'; c < 'a'+R; c++) {
+                if (v.node.next[indexOf(c)] != null) {
                     queue.add(new NodeWithWord(v.node.next[indexOf(c)], 
                                                v.word + c));
                 }

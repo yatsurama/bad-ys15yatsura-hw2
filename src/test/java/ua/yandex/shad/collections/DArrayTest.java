@@ -6,6 +6,7 @@
 package ua.yandex.shad.collections;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -222,12 +223,51 @@ public class DArrayTest {
         assertEquals(expResult, result);
     }
     
+    @Test(expected = NoSuchElementException.class)
+    public void testHasNext_CheckInNext() {
+        DArray emptyArray = new DArray();
+        Iterator<String> it = emptyArray.iterator();
+        String result = it.next();
+    }
+    
     @Test
     public void testHasNext_NotEmptyArray() {
         Iterator<String> it = array.iterator();
         boolean expResult = true;
         boolean result = it.hasNext();
         assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testEquals_NullObj() {
+        assertFalse(array.equals(null));
+    }
+    
+    @Test
+    public void testEquals_WithInt() {
+        assertFalse(array.equals(5));
+    }
+    
+    @Test
+    public void testEquals_DifferentLengths() {
+        assertFalse(array.equals(new DArray()));
+    }
+    
+    @Test
+    public void testEquals_DifferentElements() {
+        DArray other = new DArray();
+        other.push("zero");
+        other.push("one");
+        other.push("dva");
+        other.push("three");
+        other.push("four");
+        other.push("five");
+        assertFalse(array.equals(new DArray()));
+    }
+    
+    @Test
+    public void testHashCode_() {
+        assertEquals(array.hashCode(), 42);
     }
 
 }

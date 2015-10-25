@@ -67,6 +67,15 @@ public class TupleTest {
         assertEquals(expResult, result);
     }
     
+    @Test
+    public void testEquals_WithUnequalWeight() {
+        Tuple obj = new Tuple("pascal", 5);
+        Tuple instance = new Tuple("pascal", 6);
+        boolean expResult = false;
+        boolean result = instance.equals(obj);
+        assertEquals(expResult, result);
+    }
+    
     /**
      * Test of hashCode method, of class Tuple.
      */

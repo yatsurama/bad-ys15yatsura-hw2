@@ -1,7 +1,6 @@
 package ua.yandex.shad.collections;
 
 import java.util.*;
-import java.util.NoSuchElementException;
 
 public class DArray implements Iterable<String>{
     public static final int DEFAULT_LENGTH = 16;
@@ -43,7 +42,7 @@ public class DArray implements Iterable<String>{
     
     public void set(int index, String s) {
         validateIndex(index);
-        strings[index] = new String(s);
+        strings[index] = s;
     }
     
     public void push(String s) {

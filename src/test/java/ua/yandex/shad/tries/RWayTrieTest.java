@@ -121,8 +121,13 @@ public class RWayTrieTest {
     }
     
     @Test(expected = IllegalArgumentException.class)
-    public void testIndexOf_NotLetter() {
+    public void testIndexOf_LessThanA() {
         int result = RWayTrie.indexOf('5');
+    }
+    
+    @Test(expected = IllegalArgumentException.class)
+    public void testIndexOf_MoreThanZ() {
+        int result = RWayTrie.indexOf('~');
     }
     
     @Test

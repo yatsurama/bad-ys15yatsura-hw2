@@ -249,6 +249,11 @@ public class PrefixMatchesTest {
         DArray result = new DArray();
         result = prefMatches.wordsWithPrefix("", 1);
     }
+    
+    @Test(expected = NullPointerException.class)
+    public void testWordsWithPrefix_String_int_NullPref() {  
+        DArray result = prefMatches.wordsWithPrefix(null, 1);
+    }
 
      /**
      * Test of wordsWithPrefix method, of class PrefixMatches.

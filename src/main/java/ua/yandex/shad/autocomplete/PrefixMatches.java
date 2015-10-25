@@ -9,7 +9,6 @@ import ua.yandex.shad.tries.Tuple;
 import ua.yandex.shad.tries.Trie;
 import ua.yandex.shad.tries.RWayTrie;
 import ua.yandex.shad.collections.DArray;
-import java.util.*;
 /**
  *
  * @author andrii
@@ -26,7 +25,7 @@ public class PrefixMatches {
         
         for (int i = 0; i < strings.length; i++) {
             String[] words = strings[i].split(" ");
-            for(int j = 0; j < words.length; j++) {
+            for (int j = 0; j < words.length; j++) {
                 if (words[j].length() >= MIN_LENGTH) {
                     trie.add(new Tuple(words[j], words[j].length()));
                 }
@@ -48,21 +47,21 @@ public class PrefixMatches {
     }
 
     public DArray wordsWithPrefix(String pref, int k) {
-        if(pref == null) {
+        if (pref == null) {
             throw new NullPointerException();
         }
+        int param = k;
         
-        if(pref.length() < MIN_PREF || k < 0) {
+        if (pref.length() < MIN_PREF || k < 0) {
             throw new IllegalArgumentException();
         }
         
-        DArray words = new DArray();
         DArray autoComplete = new DArray();
-        words = trie.wordsWithPrefix(pref);
-        for(int i=0; i < words.actualLength && k > 0; i++) {
+        DArray words = trie.wordsWithPrefix(pref);
+        for(int i = 0; i < words.actualLength && param > 0; i++) {
                 autoComplete.push(words.get(i));
-                if(i==0 || words.get(i).length() > words.get(i-1).length()) {
-                    k--;
+                if(i == 0 || words.get(i).length() > words.get(i-1).length()) {
+                    param--;
                 }
         }
         return autoComplete;
