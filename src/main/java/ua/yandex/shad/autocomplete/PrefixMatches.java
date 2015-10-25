@@ -19,7 +19,11 @@ public class PrefixMatches {
     public static final int MIN_PREF = 2;
     public static final int DEFAULT_K = 3;
     
-    public Trie trie = new RWayTrie();
+    private Trie trie = new RWayTrie();
+    
+    public Trie getTrie() {
+        return trie;
+    }
     
     public int load(String... strings) {
         
@@ -58,7 +62,7 @@ public class PrefixMatches {
         
         DArray autoComplete = new DArray();
         DArray words = trie.wordsWithPrefix(pref);
-        for (int i = 0; i < words.actualLength && param > 0; i++) {
+        for (int i = 0; i < words.actualLength() && param > 0; i++) {
                 autoComplete.push(words.get(i));
                 if (i == 0 || words.get(i).length() > words.get(i-1).length()) {
                     param--;

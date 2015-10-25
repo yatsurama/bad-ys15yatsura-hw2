@@ -127,8 +127,8 @@ public class RWayTrie implements Trie {
     }
 
     static class NodeWithWord {
-        public final Node node;
-        public final String word;
+        private final Node node;
+        private final String word;
  
         public NodeWithWord(Node n, String w) {
             node = n;

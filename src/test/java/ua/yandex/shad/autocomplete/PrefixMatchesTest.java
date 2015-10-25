@@ -41,10 +41,10 @@ public class PrefixMatchesTest {
     public void setUp() {
         prefMatches = new PrefixMatches();
         initializeMocks();
-        prefMatches.trie.add(mockHey);
-        prefMatches.trie.add(mockYou);
-        prefMatches.trie.add(mockHell);
-        prefMatches.trie.add(mockHello);
+        prefMatches.getTrie().add(mockHey);
+        prefMatches.getTrie().add(mockYou);
+        prefMatches.getTrie().add(mockHell);
+        prefMatches.getTrie().add(mockHello);
     }
     
     @After
@@ -176,7 +176,7 @@ public class PrefixMatchesTest {
         prefMatches.delete("hey");
         prefMatches.delete("hell");
         int expResult = 2;
-        int result = prefMatches.trie.size();
+        int result = prefMatches.getTrie().size();
         assertEquals(expResult, result);
     }
     
@@ -187,7 +187,7 @@ public class PrefixMatchesTest {
         prefMatches.delete("hey");
         prefMatches.delete("hell");
         int expResult = 0;
-        int result = prefMatches.trie.size();
+        int result = prefMatches.getTrie().size();
         assertEquals(expResult, result);
     }
 

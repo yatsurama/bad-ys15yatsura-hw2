@@ -36,13 +36,13 @@ public class DArrayTest {
     @Before
     public void setUp() {
         array = new DArray(8);
-        array.actualLength = 6;
-        array.strings[0] = "zero";
-        array.strings[1] = "one";
-        array.strings[2] = "two";
-        array.strings[3] = "three";
-        array.strings[4] = "four";
-        array.strings[5] = "five";
+        array.setLength(6);
+        array.set(0, "zero");
+        array.set(1, "one");
+        array.set(2, "two");
+        array.set(3, "three");
+        array.set(4, "four");
+        array.set(5, "five");
     }
     
     @After
@@ -163,7 +163,7 @@ public class DArrayTest {
     public void testSet_Three() {
         String expResult = "tres";
         array.set(3, "tres");
-        String result = array.strings[3];
+        String result = array.get(3);
         assertEquals(expResult, result);
     }
     
@@ -183,14 +183,14 @@ public class DArrayTest {
     public void testPush_OneItem() {
         array.push("hello");
         String expResult = "hello";
-        String result = array.strings[6];
+        String result = array.get(6);
         assertEquals(expResult, result);
     }
     
     @Test
     public void testPush_Null() {
         array.push(null);
-        String result = array.strings[6];
+        String result = array.get(6);
         assertNull(result);
     }
     
@@ -199,7 +199,7 @@ public class DArrayTest {
         DArray emptyArray = new DArray();
         emptyArray.push("I am first!");
         String expResult = "I am first!";
-        String result = emptyArray.strings[0];
+        String result = emptyArray.get(0);
         assertEquals(expResult, result);
     }
 

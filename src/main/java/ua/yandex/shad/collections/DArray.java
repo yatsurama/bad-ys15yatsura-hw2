@@ -5,9 +5,17 @@ import java.util.NoSuchElementException;
 
 public class DArray implements Iterable<String> {
     public static final int DEFAULT_LENGTH = 16;
-    public int actualLength;
+    private int actualLength;
     
-    public String[] strings;
+    private String[] strings;
+    
+    public int actualLength() {
+        return actualLength;
+    }
+    
+    public void setLength(int l) {
+        actualLength = l;
+    }
     
     public DArray() {
         actualLength = 0;
@@ -84,7 +92,7 @@ public class DArray implements Iterable<String> {
             return false;
         }
         for (int i = 0; i < actualLength; i++) {
-            if( !strings[i].equals(other.strings[i])) {
+            if (!strings[i].equals(other.strings[i])) {
                 return false;
             }
         }

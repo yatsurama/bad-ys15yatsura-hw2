@@ -3,7 +3,12 @@ package ua.yandex.shad.tries;
 public class Tuple {
     private final String term;
     private final int weight;
-
+    
+    public Tuple() {
+        term = "";
+        weight = 0;
+    }
+    
     public Tuple(String term, int weight) {
         this.term = term;
         this.weight = weight;
@@ -15,11 +20,6 @@ public class Tuple {
     
     public String getTerm() {
         return term;
-    }
-    
-    public Tuple() {
-        term = "";
-        weight = 0;
     }
     
     @Override 
