@@ -262,7 +262,7 @@ public class DArrayTest {
         other.push("three");
         other.push("four");
         other.push("five");
-        assertFalse(array.equals(new DArray()));
+        assertFalse(array.equals(other));
     }
     
     @Test

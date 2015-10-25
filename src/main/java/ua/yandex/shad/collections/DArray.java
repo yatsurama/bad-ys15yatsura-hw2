@@ -9,14 +9,6 @@ public class DArray implements Iterable<String> {
     
     private String[] strings;
     
-    public int actualLength() {
-        return actualLength;
-    }
-    
-    public void setLength(int l) {
-        actualLength = l;
-    }
-    
     public DArray() {
         actualLength = 0;
         strings = new String[DEFAULT_LENGTH];
@@ -25,6 +17,14 @@ public class DArray implements Iterable<String> {
     public DArray(int length) {
         actualLength = 0;
         strings = new String[length];
+    }
+    
+    public int actualLength() {
+        return actualLength;
+    }
+    
+    public void setLength(int l) {
+        actualLength = l;
     }
     
     public void validateIndex(int index) {
