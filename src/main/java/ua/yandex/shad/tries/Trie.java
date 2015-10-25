@@ -1,4 +1,5 @@
 package ua.yandex.shad.tries;
+import ua.yandex.shad.collections.DArray;
 
 public interface Trie {
 
@@ -8,9 +9,9 @@ public interface Trie {
 
     public boolean delete(String word);
 
-    public Iterable<String> words();
+    public DArray words();
 
-    public Iterable<String> wordsWithPrefix(String pref);
+    public DArray wordsWithPrefix(String pref);
     
     public int size();
 }

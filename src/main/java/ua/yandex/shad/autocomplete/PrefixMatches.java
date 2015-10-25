@@ -7,36 +7,68 @@ package ua.yandex.shad.autocomplete;
 
 import ua.yandex.shad.tries.Tuple;
 import ua.yandex.shad.tries.Trie;
-
+import ua.yandex.shad.tries.RWayTrie;
+import ua.yandex.shad.collections.DArray;
+import java.util.*;
 /**
  *
  * @author andrii
  */
 public class PrefixMatches {
 
-    private Trie trie;
-
+    public static final int MIN_LENGTH = 3;
+    public static final int MIN_PREF = 2;
+    public static final int DEFAULT_K = 3;
+    
+    public Trie trie = new RWayTrie();
+    
     public int load(String... strings) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+        for (int i = 0; i < strings.length; i++) {
+            String[] words = strings[i].split(" ");
+            for(int j = 0; j < words.length; j++) {
+                if (words[j].length() >= MIN_LENGTH) {
+                    trie.add(new Tuple(words[j], words[j].length()));
+                }
+            }
+        }
+        return trie.size();
     }
 
     public boolean contains(String word) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return trie.contains(word);
     }
 
     public boolean delete(String word) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return trie.delete(word);
     }
 
-    public Iterable<String> wordsWithPrefix(String pref) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public DArray wordsWithPrefix(String pref) {
+        return wordsWithPrefix(pref, DEFAULT_K);
     }
 
-    public Iterable<String> wordsWithPrefix(String pref, int k) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public DArray wordsWithPrefix(String pref, int k) {
+        if(pref == null) {
+            throw new NullPointerException();
+        }
+        
+        if(pref.length() < MIN_PREF || k < 0) {
+            throw new IllegalArgumentException();
+        }
+        
+        DArray words = new DArray();
+        DArray autoComplete = new DArray();
+        words = trie.wordsWithPrefix(pref);
+        for(int i=0; i < words.actualLength && k > 0; i++) {
+                autoComplete.push(words.get(i));
+                if(i==0 || words.get(i).length() > words.get(i-1).length()) {
+                    k--;
+                }
+        }
+        return autoComplete;
     }
 
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return trie.size();
     }
 }
