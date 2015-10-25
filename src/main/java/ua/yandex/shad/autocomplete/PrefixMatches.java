@@ -62,10 +62,9 @@ public class PrefixMatches {
         
         DArray autoComplete = new DArray();
         DArray words = trie.wordsWithPrefix(pref);
-        param--;
         for (int i = 0; i < words.actualLength() && param > 0; i++) {
                 autoComplete.push(words.get(i));
-                if (words.get(i).length() > words.get(i-1).length()) {
+                if (i==0 || words.get(i).length() > words.get(i-1).length()) {
                     param--;
                 }
         }

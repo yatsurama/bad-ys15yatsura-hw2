@@ -274,6 +274,7 @@ public class PrefixMatchesTest {
         DArray result = new DArray();
         result = prefMatches.wordsWithPrefix("y");
     }
+    
     /**
      * Test of size method, of class PrefixMatches.
      */
